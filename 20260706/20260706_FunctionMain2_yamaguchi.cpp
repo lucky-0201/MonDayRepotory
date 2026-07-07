@@ -53,7 +53,25 @@ void Game()
 	cout << "EXP:" << Exp << endl;
 	cout << "======================================================================\n";
 	cout << " グー 0：チョキ 1：パー :2" << endl;
+	cout << "入力:";
 	player = InputCheck(MIN,MAX);
+	
+	CPU = rand() % CPU_H;
+	cout << "CPU:"<< CPU << endl;
+	jug = player - CPU;
+	if (jug == -1|| jug == 2)
+	{
+		cout << "あなたの価値" << endl;
+		cout << "経験値を取得しました！" << endl;
+	}
+	else if (jug == 0)
+	{
+		cout << "あいこ" << endl;
+	}
+	else
+	{
+		cout << "CPUの勝ち" << endl;
+	}
 
-	cout << "CPU:" << endl;
+	
 }

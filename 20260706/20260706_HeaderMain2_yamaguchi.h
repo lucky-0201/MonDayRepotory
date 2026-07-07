@@ -7,6 +7,7 @@ void Game();
 const int MAX = 2;
 const int MIN = 0;
 const int Exp_Ac = 15;
+const int CPU_H = 3;
 
 //
 enum Hand

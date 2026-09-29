@@ -27,7 +27,7 @@ void CradManager::CreateCards()
 
 }
 
-void CradManager::Shuffleards()
+void CradManager::ShuffleCards()
 {
 	//ƒVƒƒƒbƒtƒ‹
 	for (int j = 0; j < CARD_TOTAL; j++)

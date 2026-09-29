@@ -1,9 +1,89 @@
-#include<iostream>
-#include"game.h"
-#include"CradManager.h"
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+
+#include "Game.h"
+#include "Config.h"
+
 using namespace std;
 
-game::game()
+Game::Game()
 {
+	// カードを作成してシャッフル
+	cardManager.CreateCards();
+	cardManager.ShuffleCards();
+}
 
+void Game::Start()
+{
+	// 初期カードを配る
+	DealInitialCards();
+	// プレイヤーのターン
+	bool playerTurnResult = turn.PlayPlayerTrun(&player, &cardManager);
+	// CPUのターン
+	if (playerTurnResult)
+	{
+		turn.PlayCpuTrun(&player, &cpu, &cardManager);
+	}
+	else
+	{
+		cout << "\nPlayerの負けです。\n";
+
+		return;
+	}
+	// 勝敗判定
+	ShowResult();
+}
+
+void Game::DealInitialCards()
+{
+	// プレイヤーとCPUに初期カードを配る
+	for (int i = 0; i < START_CARD; i++)
+	{
+		int playerCard = cardManager.DrawCard();
+		player.PlayerAddCard(playerCard);
+		int cpuCard = cardManager.DrawCard();
+		cpu.CPUAddCard(cpuCard);
+	}
+}
+
+void Game::ShowResult()
+{
+	cout << "\n===========================\n";
+	cout << "ゲーム結果\n";
+	cout << "===========================\n";
+	player.ShowStatus();
+	cpu.ShowCard();
+
+	int playerTotal = player.GetTotal();
+	int cpuTotal = cpu.GetTotal();
+
+	if (cpuTotal >= BURST_SCORE || playerTotal == TARGET_SCORE)
+	{
+		cout << "\nPlayer'S Winner!!\n";
+		return;
+	}
+
+	if (cpuTotal == TARGET_SCORE)
+	{
+		cout << "\nCPU'S Winner!!\n";
+		return;
+
+	}
+	int playerDistance = TARGET_SCORE - playerTotal;
+
+	int cpuDistance = TARGET_SCORE - cpuTotal;
+
+	if (playerDistance > cpuDistance)
+	{
+		cout << "\nPlayerの勝ちです。\n";
+	}
+	else if (playerDistance < cpuDistance)
+	{
+		cout << "\nCPUの勝ちです。\n";
+	}
+	else
+	{
+		cout << "\n引き分けです。\n";
+	}
 }

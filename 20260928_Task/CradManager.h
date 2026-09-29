@@ -9,7 +9,7 @@ public:
 	CradManager();
 
 	void CreateCards();
-	void Shuffleards();
+	void ShuffleCards();
 	int DrawCard();
 
 	int GetCardCount();

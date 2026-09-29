@@ -5,7 +5,6 @@ using namespace std;
 CPU::CPU()
 {
 	Total = 0;
-
 }
 
 void CPU::CPUAddCard(int card)

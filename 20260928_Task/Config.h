@@ -2,7 +2,7 @@
 //目標スコア
 const int TARGET_SCORE = 21;
 //バーストスコア
-const int BUST_SCORE = 22;
+const int BURST_SCORE = 22;
 //CPUが自動的にカードを引く上限
 const int CPU_LIMIT_CARD = 15;
 

@@ -3,6 +3,7 @@ class Player
 {
 private:
 	int total;
+
 public:
 	Player();
 

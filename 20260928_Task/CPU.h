@@ -3,6 +3,7 @@ class CPU
 {
 private:
 	int Total;
+
 public:
 	CPU();
 

@@ -8,5 +8,5 @@ class Trun
 public:
 	bool PlayPlayerTrun(Player*player,CradManager*cardManager);
 	
-	void PlayCpuTrun(CPU*cpu,CradManager*cardManager);
+	void PlayCpuTrun(Player*player,CPU*cpu,CradManager*cardManager);
 };

@@ -6,9 +6,10 @@ using namespace std;
 
 int main()
 {
+	
 	srand((unsigned int)time(NULL));
 	Game game;
 
-	game.ShowGame();
+	game.GameStart();
 	return 0;
 }

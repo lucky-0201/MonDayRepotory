@@ -1,30 +1,85 @@
 #include "Char.h"
-#include<iostream>
 #include"Config.h"
+
+#include<iostream>
+#include<cstdlib>
+#include<ctime>
 
 using namespace std;
 
-
-
-void Char::HP()
+//ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+Char::Char()
 {
-	int hp = CHAR_HP;
-	if (hp > 100)
-	{
-		hp = 100;
-	}
-	else if (hp < 0)
-	{
-		hp = 0;
-	}
+	hp = Config::MAX_HP;
+
+	attack = rand() % (Config::MAX_STARTS - Config::MIN_STARTS + 1) + Config::MIN_STARTS;
+	protect = rand() % (Config::MAX_STARTS - Config::MIN_STARTS + 1) + Config::MIN_STARTS;
+	evasion = rand() % (Config::MAX_STARTS - Config::MIN_STARTS + 1) + Config::MIN_STARTS;
 }
 
 void Char::ShowStatas()
 {
-	attack = rand() % ATTACK_ABILITY + MIN_NUMBER;
-	protect = rand() % PROTECT_ABILITY + MIN_NUMBER;
-	evasion = rand() % EVASION_ABILITY + MIN_NUMBER;
-	cout << "UŒ‚—Í" << attack << endl;
-	cout << "–hŒä—Í" << protect << endl;
-	cout << "‰ñ”ð—Í" << evasion << endl;
+	cout << "HPF" << hp << endl;
+	cout << "UŒ‚—ÍF" << attack << endl;
+	cout << "–hŒä—ÍF" << protect << endl;
+	cout << "‰ñ”ð—ÍF" << evasion << endl;
+}
+
+void Char::Attack(Char &target)
+{
+	//ƒ‰ƒ“ƒ_ƒ€UŒ‚
+	int ramAtk = rand() % (Config::MAX_RANDOW - Config::MIN_RANDOW + 1) + Config::MIN_RANDOW;
+	int attackP = attack + ramAtk;
+	cout << "UŒ‚’l‚Í" << attackP << endl;
+
+	//‰ñ”ð”»’è
+	if (attackP <= target.evasion)
+	{
+		cout << "UŒ‚‚ð‰ñ”ð‚µ‚Ü‚µ‚½B" << endl;
+		cout << "ƒ_ƒ[ƒW‚Í‚O‚Å‚·" << endl;
+	}
+	else
+	{
+		//ƒ_ƒ[ƒWŒvŽZ
+		int damege = attackP - target.protect;
+
+		if (damege < 0)
+		{
+			damege = 0;
+		}
+
+		target.hp -= damege;
+
+		cout << "UŒ‚¬Œ÷I ƒ_ƒ[ƒWG"<< damege << "—^‚¦‚Ü‚µ‚½B" << endl;
+
+		//¶‘¶”»’è
+		if (target.hp < Config::DEAD_HP)
+		{
+			target.hp = 0;
+		}
+	}
+}
+
+//‰ñ•œ
+void Char::Heal()
+{
+	int ranHeal = rand() % (Config::MAX_RANDOW - Config::MIN_RANDOW + 1) + Config::MIN_RANDOW;
+	hp += ranHeal;
+
+	if (hp > Config::MAX_HP)
+	{
+		hp = Config::MAX_HP;
+	}
+
+	cout << "HP‚ð" << ranHeal <<  "‰ñ•œ‚µ‚Ü‚µta" << endl;
+}
+
+bool Char::IsAlive()
+{
+	return hp > Config::DEAD_HP;
+}
+
+int Char::GetHp()
+{
+	return hp;
 }

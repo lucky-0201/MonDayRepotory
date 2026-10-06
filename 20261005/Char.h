@@ -3,17 +3,23 @@
 class Char
 {
 private:
+	
+protected:
 	int hp;
 	int attack;
 	int protect;
 	int evasion;
 
-protected:
-
-
 public:
-	
+	Char();
 
-	void HP();
 	void ShowStatas();
+
+	void Attack(Char &target);
+
+	void Heal();
+
+	bool IsAlive();
+
+	int GetHp();
 };

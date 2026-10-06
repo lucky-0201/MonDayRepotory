@@ -1,16 +1,27 @@
 #pragma once
 
-const int CHAR_HP = 100;
+namespace Config
+{
+	//HP定数
+	const int MAX_HP = 100;
+	const int DEAD_HP = 0;
 
+	//能力値
+	const int MIN_STARTS = 1;
+	const int MAX_STARTS = 20;
 
-const int ATTACK_ABILITY = 20;
+	//攻撃・回復のランダム値
+	const int MIN_RANDOW = 1;
+	const int MAX_RANDOW = 12;
 
-const int PROTECT_ABILITY = 20;
+	//プレイヤーの行動
+	const int INPUT_MIN = 1;
+	const int INPUT_MAX = 2;
 
-const int EVASION_ABILITY = 20;
-const int MIN_NUMBER = 1;
+	//敵の行動
+	const int ENEMY_ACTION = 2;
 
-const int INPUT_MIN = 1;
-const int INPUT_MAX = 2;
+}
+
 
 //Evasion Ability

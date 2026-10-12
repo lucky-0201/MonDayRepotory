@@ -6,10 +6,7 @@
 
 using namespace std;
 
-//コンストラクタ
-Player player("");
-Enemy enemy("");
-Boss boss("");
+
 
 int main(void)
 {
@@ -29,6 +26,11 @@ int main(void)
 
 	cout << "魔王：" << endl;
 	cin >> BossName;
+
+	//コンストラクタ
+	Player player(playerName);
+	Enemy enemy(enemyName);
+	Boss boss(BossName);
 
 	character.Attack();
 	player.Attack();

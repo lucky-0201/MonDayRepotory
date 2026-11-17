@@ -1,53 +1,73 @@
 #include "Game.h"
-#include"Enemy.h"
-
 #include<iostream>
 #include<limits>
 
-void Game::CreateEnemy()
+
+void Game::InitEnemy()
 {
-	for (int i = 0;i < 3;i++)
+	for (int i = 0; i < 3; i++)
 	{
-		enemy.push_back(make_shared<Enemy>("“G",100));
+		enemys.push_back(std::make_shared<Enemy>());
 	}
 }
 
-void Game::ShowEnemy()const
+void Game::ShowEnemy() const
 {
-	cout << "===========“G‚ÌHP========" << endl;
-
-	for (rsize_t i = 0;i < enemy.size();++i)
+	std::cout << "“G:\n";
+	for (int i = 0; i < enemys.size(); i++)
 	{
-		cout << "“G" << i + 1 << ":" << enemy[i]->GetHp();
-
-		if (!enemy[i]->isAlive())
+		if (enemys[i]->isAlive())
 		{
-			cout << "Œ‚”j" << endl;
-
+			std::cout << "“G" << i + 1 << "HP:"
+				<< enemys[i]->GetHp() << "\n";
 		}
-
-		cout << endl;
+		else
+		{
+			std::cout << "Œ‚”jÏ‚Ý\n";
+		}
 	}
 }
 
-void Game::AttackEnemy(int targetNumber)
+void Game::AttackEnemy()
 {
-	targetNumber -= 1;
+	int target;
+	std::cout << "UŒ‚‚·‚é“G‚ð‘I‘ð‚µ‚Ä‚­‚¾‚³‚¢B(1`3)\n";
 
-	if (targetNumber < 0 || targetNumber > static_cast<int>(enemy.size()))
+	if (!(std::cin >> target))
 	{
-		cout << "‚»‚Ì“G‚ðƒ^[ƒQƒbƒg‰»‚Å‚«‚Ü‚¹‚ñ";
+		std::cout << "”Žš‚ð“ü—Í‚µ‚Ä‚­‚¾‚³‚¢\n";
+		std::cin.clear();
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
+		return;
+
+	}
+
+	if (target < 1 || target > 3)
+	{
+		std::cout << "“ü—Í‚µ‚½”Žš‚Í‘I‘ðo—ˆ‚Ü‚¹‚ñBÄ“x“ü—Í‚µ‚Ä‚­‚¾‚³‚¢B\n";
 		return;
 	}
 
-	enemy[targetNumber]->TakeDamage(30);
-	cout << "“G" << targetNumber + 1 << "‚É‚R‚Oƒ_ƒ[ƒW‚ð—^‚¦‚Ü‚µ‚½";
+	std::shared_ptr<Enemy> targetEnemy = enemys[target - 1];
+
+	if (!targetEnemy->isAlive())
+	{
+		std::cout << "‚±‚Ì“G‚Í‚·‚Å‚É“|‚³‚ê‚Ä‚¢‚Ü‚·B\n";
+		return;
+	}
+
+	std::cout << "UŒ‚‚·‚é“G‚ÍA" << target << "\n";
+
+	targetEnemy->TakeDamage(30);
+	std::cout << "“G" << target << "‚Éí“¬ƒ_ƒ[ƒW"
+		<< 30 << "‚ð—^‚¦‚Ü‚µ‚½B\n";
+
 }
 
-bool Game::isAllEnemy() const
+bool Game::isGameClear() const
 {
-	for (const auto &enemy : enemy)
+	for (const auto& enemy : enemys)
 	{
 		if (enemy->isAlive())
 		{
@@ -60,10 +80,16 @@ bool Game::isAllEnemy() const
 
 void Game::Run()
 {
-	CreateEnemy();
+	InitEnemy();
 
 	while (true)
 	{
-
+		ShowEnemy();
+		AttackEnemy();
+		if (isGameClear())
+		{
+			std::cout << "GamerClear\n";
+			break;
+		}
 	}
 }

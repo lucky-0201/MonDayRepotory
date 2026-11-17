@@ -2,7 +2,7 @@
 
 #include<iostream>
 
-Enemy::Enemy(const string& name):name(name),hp(hp)
+Enemy::Enemy():hp(100)
 {
 	cout << "“G‚ð¶¬‚µ‚Ü‚µ‚½" << endl;
 }
@@ -14,10 +14,7 @@ Enemy::~Enemy()
 
 void Enemy::TakeDamage(int damege)
 {
-	if (!isAlive())
-	{
-		return;
-	}
+	
 
 	hp -= damege;
 

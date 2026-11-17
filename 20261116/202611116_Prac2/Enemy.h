@@ -6,11 +6,10 @@ using namespace std;
 class Enemy
 {
 private:
-	string name;
 	int hp;
 
 public:
-	Enemy(const string &name);
+	Enemy();
 	~Enemy();
 
 	void TakeDamage(int damege);

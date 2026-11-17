@@ -10,15 +10,16 @@ class Enemy;
 class Game
 {
 private:
-	vector<shared_ptr<Enemy> > enemy;
+	vector<shared_ptr<Enemy> > enemys;
 
-	void CreateEnemy();
+	void InitEnemy();
+
 
 	void ShowEnemy()const;
 
-	void AttackEnemy(int targetNumber);
+	void AttackEnemy();
 
-	bool isAllEnemy() const;
+	bool isGameClear() const;
 
 public:
 	void Run();
